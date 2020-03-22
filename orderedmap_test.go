@@ -59,12 +59,12 @@ func TestOrderedMap(t *testing.T) {
 		"strings",
 		"mixed",
 	}
-	for i, _ := range keys {
+	for i := range keys {
 		if keys[i] != expectedKeys[i] {
 			t.Error("Keys method", keys[i], "!=", expectedKeys[i])
 		}
 	}
-	for i, _ := range expectedKeys {
+	for i := range expectedKeys {
 		if keys[i] != expectedKeys[i] {
 			t.Error("Keys method", keys[i], "!=", expectedKeys[i])
 		}
@@ -234,7 +234,7 @@ func TestUnmarshalJSON(t *testing.T) {
 	if !ok {
 		t.Error("Missing key for nested map 1 deep")
 	}
-	v := vi.(OrderedMap)
+	v := vi.(*OrderedMap)
 	k = v.Keys()
 	for i := range k {
 		if k[i] != expectedKeys[i] {
@@ -249,7 +249,7 @@ func TestUnmarshalJSON(t *testing.T) {
 	if !ok {
 		t.Error("Missing key for nested map 2 deep")
 	}
-	v = vi.(OrderedMap)
+	v = vi.(*OrderedMap)
 	k = v.Keys()
 	for i := range k {
 		if k[i] != expectedKeys[i] {
@@ -267,7 +267,7 @@ func TestUnmarshalJSON(t *testing.T) {
 		t.Error("Missing key for multitype array")
 	}
 	vslice := vislice.([]interface{})
-	vmap := vslice[2].(OrderedMap)
+	vmap := vslice[2].(*OrderedMap)
 	k = vmap.Keys()
 	for i := range k {
 		if k[i] != expectedKeys[i] {
@@ -279,7 +279,7 @@ func TestUnmarshalJSON(t *testing.T) {
 	vslice = vislice.([]interface{})
 	expectedKeys = []string{"inner"}
 	vinnerslice := vslice[3].([]interface{})
-	vinnermap := vinnerslice[0].(OrderedMap)
+	vinnermap := vinnerslice[0].(*OrderedMap)
 	k = vinnermap.Keys()
 	for i := range k {
 		if k[i] != expectedKeys[i] {
@@ -351,7 +351,7 @@ func TestUnmarshalJSONArrayOfMaps(t *testing.T) {
 	}
 	vs := vi.([]interface{})
 	for _, vInterface := range vs {
-		v := vInterface.(OrderedMap)
+		v := vInterface.(*OrderedMap)
 		k = v.Keys()
 		for i := range k {
 			if k[i] != expectedKeys[i] {
