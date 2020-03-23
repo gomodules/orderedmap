@@ -417,7 +417,7 @@ func DeepCopyJSONValue(x interface{}) interface{} {
 			clone[i] = DeepCopyJSONValue(v).(*OrderedMap)
 		}
 		return clone
-	case string, int64, bool, float64, nil, json.Number:
+	case string, int8, uint8, int16, uint16, int32, uint32, int64, uint64, int, uint, float32, float64, bool, nil, json.Number:
 		return x
 	default:
 		panic(fmt.Errorf("cannot deep copy %T", x))
